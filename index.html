@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SSLTC Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<h2>SSLTC Registration Form</h2>
+
+<form id="form">
+
+<input name="name" placeholder="Name" required><br><br>
+<input name="fatherName" placeholder="Father Name" required><br><br>
+<input name="mobile" placeholder="Mobile" required><br><br>
+<textarea name="address" placeholder="Address" required></textarea><br><br>
+<input name="dob" type="date" required><br><br>
+<input name="aadhaarNo" placeholder="Aadhaar No" required><br><br>
+
+<select name="course">
+  <option>Livestock Training</option>
+  <option>Animal Care</option>
+</select><br><br>
+
+<button type="submit">Submit</button>
+
+</form>
+
+<p id="msg"></p>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycby2t8CaQHamjLUUy0H2oTpWdJ8uAhPp9EXss4A6Qbmr1qphou023_LPNXhLwhI5TWyf/exec";
+
+document.getElementById("form").addEventListener("submit", e=>{
+  e.preventDefault();
+
+  fetch(scriptURL, {
+    method:"POST",
+    body:new FormData(document.getElementById("form"))
+  })
+  .then(r=>r.text())
+  .then(data=>{
+    document.getElementById("msg").innerText="Success ✔";
+    document.getElementById("form").reset();
+  })
+  .catch(err=>{
+    document.getElementById("msg").innerText="Error ❌";
+  });
+});
+</script>
+
+</body>
+</html>
